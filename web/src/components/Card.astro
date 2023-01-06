@@ -1,62 +1,22 @@
 ---
 export interface Props {
-	title: string;
-	body: string;
-	href: string;
+  id: number
+  poster_path: string
+  title: string
+  original_language: string
 }
-
-const { href, title, body } = Astro.props;
+const { id, title, original_language, poster_path } = Astro.props
 ---
 
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
+<li class="h-auto list-none w-64 rounded-xl shadow-2xl">
+  <a href={`movie/${id}`}>
+    <img
+      src={`https://image.tmdb.org/t/p/original${poster_path}`}
+      alt="{name}"
+    />
+    <div class="p-2">
+      <h3 class="text-3xl">{title}</h3>
+      <p class="ml-3"><strong>language:</strong>{original_language}</p>
+    </div>
+  </a>
 </li>
-<style>
-	.link-card {
-		list-style: none;
-		display: flex;
-		padding: 0.15rem;
-		background-color: white;
-		background-image: var(--accent-gradient);
-		background-size: 400%;
-		border-radius: 0.5rem;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-	}
-
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: 1rem 1.3rem;
-		border-radius: 0.35rem;
-		color: #111;
-		background-color: white;
-		opacity: 0.8;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-		color: #444;
-	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-	}
-	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent));
-	}
-</style>
