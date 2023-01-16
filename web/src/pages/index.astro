@@ -1,25 +1,112 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import Card from '../components/Card.astro'
+import Results from '../components/Results.svelte'
+// import Search from '../components/Search.astro'
+// import SearchResults from '../components/SearchResults.astro'
+
+const searchTerm: string = '';
+
 const firstPageMovies = await fetch(
-  `https://api.themoviedb.org/3/trending/movie/day?api_key=${import.meta.env.API_KEY}`,
+  `https://api.themoviedb.org/3/trending/movie/day?api_key=${
+    import.meta.env.API_KEY
+  }`,
 ).then((res) => res.json())
 const secondPageMovies = await fetch(
-  `https://api.themoviedb.org/3/trending/movie/day?api_key=${import.meta.env.API_KEY}&page=2`,
+  `https://api.themoviedb.org/3/trending/movie/day?api_key=${
+    import.meta.env.API_KEY
+  }&page=2`,
 ).then((res) => res.json())
 
-console.log(firstPageMovies)
-console.log("secondPageMovies")
-console.log(secondPageMovies);
+const searchMovies = await fetch(
+  `https://api.themoviedb.org/3/search/movie?api_key=${
+    import.meta.env.API_KEY
+  }&query=${searchTerm}`,
+).then((res) => res.json())
 
+console.log('Search Movies');
+
+console.log(searchMovies);
+
+
+
+// let searchQuery: string = ''
+// let searchTerm: string | null = null
+// let totalPages: number | null = null
+// let searchResults: any[] = []
+// let nextPage = 1
+// let isLoading = false
+
+// function handleSubmit() {
+//   searchTerm = searchQuery.trim()
+//   searchResults = []
+//   totalPages = null
+//   nextPage = 1
+
+//   if (!searchTerm) return
+
+//   searchMovies()
+// }
+
+// function searchMovies() {
+//   isLoading = true
+
+  // const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=${
+  //   import.meta.env.API_KEY
+  // }&query=${searchTerm}`
+
+//   console.log('endpoint');
+
+//   console.log(endpoint)
+
+//   fetch(endpoint)
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw Error(response.statusText)
+//       }
+//       return response.json()
+//     })
+//     .then((data) => {
+//       if (data.total === 0) {
+//         alert('No movies were found.')
+//         return
+//       }
+//       searchResults = [...searchResults, ...data.results]
+//       totalPages = data.total_pages
+//       if (nextPage < totalPages) {
+//         nextPage += 1
+//       }
+//     })
+
+//     .catch(() => alert('An error occured!'))
+//     .finally(() => {
+//       isLoading = false
+//     })
+// }
+
+// console.log(firstPageMovies)
+// console.log('secondPageMovies')
+// console.log(secondPageMovies)
 ---
 
 <Layout title="Popular movies">
   <main class="w-2/4 m-12 items-center justify-center">
+    <!-- <Search query={searchQuery} handleSubmit={handleSubmit} />
+    <SearchResults results={searchResults} /> -->
+    <Results client:idle/>
     <h2 class="text-2xl font-bold mb-6">Popular Movies</h2>
-      <ul role="list" class="grid grid-cols-5 gap-80 m-[70px auto]">
+    
+    <!-- <input
+      value={searchTerm}
+      on:input={(e) => (searchTerm = e.target.value)}
+      type="search"
+      class="w-full px-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+      placeholder="Search for a movie"
+    />
+
+    <ul role="list" class="grid grid-cols-5 gap-x-72 gap-6 m-[70px auto]">
       {
-        firstPageMovies.results.map((movie: any) => {
+        searchMovies.results?.map((movie: any) => {
           return (
             <Card
               id={movie.id}
@@ -30,14 +117,19 @@ console.log(secondPageMovies);
           )
         })
       }
+    </ul> -->
+    
+    <ul role="list" class="grid grid-cols-5 gap-x-72 gap-6 m-[70px auto]">
       {
-        secondPageMovies.results.map((movie: any) => {
+        firstPageMovies.results.map((movie: any) => {
           return (
             <Card
               id={movie.id}
               title={movie.title}
               original_language={movie.original_language}
               poster_path={movie.poster_path}
+              vote_average={movie.vote_average}
+              vote_count={movie.vote_count}
             />
           )
         })

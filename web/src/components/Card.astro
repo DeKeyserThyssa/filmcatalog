@@ -4,19 +4,45 @@ export interface Props {
   poster_path: string
   title: string
   original_language: string
+  vote_average: number
+  vote_count: number
 }
-const { id, title, original_language, poster_path } = Astro.props
+const { id, title, original_language, poster_path, vote_average, vote_count } = Astro.props
 ---
 
 <li class="h-auto list-none w-64 rounded-xl shadow-2xl">
   <a href={`movie/${id}`}>
     <img
+      class="aspect-[2/3]"
       src={`https://image.tmdb.org/t/p/original${poster_path}`}
-      alt="{name}"
+      alt="{title}"
     />
     <div class="p-2">
-      <h3 class="text-3xl">{title}</h3>
-      <p class="ml-3"><strong>language:</strong>{original_language}</p>
+      <h3 class="text-2xl">{title}</h3>
+      <p class=""><strong>language: </strong>{original_language}</p>
+      <p class=""><strong>rating: </strong>{vote_average} ({vote_count})</p>
     </div>
   </a>
 </li>
+
+
+<!-- ---
+  let movie: any
+---
+
+<li class="h-auto list-none w-64 rounded-xl shadow-2xl">
+  <a href={`movie/${movie.id}`} rel="noopener noreferrer" target="_blank">
+    <img
+      class="aspect-[2/3]"
+      src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+      alt={movie.title || ''}
+    />
+    <div class="p-2">
+      <h3 class="text-2xl">{movie.title}</h3>
+      <p class=""><strong>language: </strong>{movie.original_language}</p>
+      <p class="">
+        <strong>rating: </strong>{movie.vote_average} ({movie.vote_count})
+      </p>
+    </div>
+  </a>
+</li> -->
