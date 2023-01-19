@@ -1,0 +1,15 @@
+---
+import Header from "../components/generic/Header.astro";
+import Results from "../components/Results.svelte";
+import Layout from "../layouts/Layout.astro";
+
+---
+
+<Layout title="Home">
+    <Header />
+    <main class="w-2/4 m-12 items-center justify-center">
+      <!-- <Search query={searchQuery} handleSubmit={handleSubmit} />
+      <SearchResults results={searchResults} /> -->
+      <Results client:idle/>
+    </main>
+  </Layout>

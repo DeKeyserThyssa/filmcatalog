@@ -23,5 +23,7 @@
     "api"
   ],
   "dependencies": {
+    "@astrojs/vue": "^1.2.2",
+    "vue": "^3.2.45"
   }
 }

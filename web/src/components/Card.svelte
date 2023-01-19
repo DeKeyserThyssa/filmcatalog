@@ -3,7 +3,7 @@
 </script>
 
 <li class="h-auto list-none w-64 rounded-xl shadow-2xl">
-  <a href={`movie/${movie.id}`} rel="noopener noreferrer" target="_blank">
+  <a href={`movie/${movie.id}`}>
     {#if movie.poster_path === null}
       <img
         class="aspect-[2/3]"

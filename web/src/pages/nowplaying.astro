@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Card from '../components/Card.astro'
+import API_KEY from '../apikey';
+import Navigation from '../components/generic/Navigation.astro';
+import Header from '../components/generic/Header.astro';
+
+const nowPlaying = await fetch(
+  `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`,
+).then((res) => res.json())
+
+---
+
+<Layout title="Now playing">
+  <Header />  
+  <main class="w-2/4 m-12 items-center justify-center">  
+    <h2 class="text-2xl font-bold mb-6">Movies that you can watch now
+    </h2>
+    <ul role="list" class="grid grid-cols-5 gap-x-72 gap-6 m-[70px auto]">
+      {
+        nowPlaying.results.map((movie: any) => {
+          return (
+            <Card
+              id={movie.id}
+              title={movie.title}
+              original_language={movie.original_language}
+              poster_path={movie.poster_path}
+              vote_average={movie.vote_average}
+              vote_count={movie.vote_count}
+            />
+          )
+        })
+      }
+    </ul>
+  </main>
+</Layout>

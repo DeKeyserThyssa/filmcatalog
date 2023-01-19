@@ -2,6 +2,7 @@
   import Search from './Search.svelte'
   import { onMount } from 'svelte'
   import SearchResults from './SearchResults.svelte'
+  import API_KEY from '../apikey.ts'
 
   let searchQuery = ''
   let searchTerm = null
@@ -10,32 +11,27 @@
   let nextPage = 1
   let isLoading = false
 
-  // let observer
-  // let target
+  let observer
+  let target
 
-  // const options = {
-  //   rootMargin: '0px 0px 300px',
-  //   threshold: 0,
-  // }
+  const loadMoreResults = (entries) => {
+    entries.forEach((entry) => {
+      // If new search or if ongoing search
+      if (nextPage === 1 || isLoading) return
 
-  // const loadMoreResults = (entries) => {
-  //   entries.forEach((entry) => {
-  //     // If new search or if ongoing search
-  //     if (nextPage === 1 || isLoading) return
+      // target is intersecting the viewport
+      if (entry.isIntersecting) {
+        searchMovies()
+      }
+    })
+  }
 
-  //     // target is intersecting the viewport
-  //     if (entry.isIntersecting) {
-  //       searchMovies()
-  //     }
-  //   })
-  // }
+  onMount(() => {
+    observer = new IntersectionObserver(loadMoreResults)
+    target = document.querySelector('.loading-indicator')
 
-  // onMount(() => {
-  //   observer = new IntersectionObserver(loadMoreResults, options)
-  //   target = document.querySelector('.loading-indicator')
-
-  //   observer.observe(target)
-  // })
+    observer.observe(target)
+  })
 
   function handleSubmit() {
     searchTerm = searchQuery.trim()
@@ -71,15 +67,19 @@
 
         if (nextPage <= totalPages) {
           nextPage += 1
+          if (nextPage >= totalPages) {
+            return
+          }
+          searchMovies()
         }
       })
       .catch(() => alert('An error occured!'))
       .finally(() => {
         isLoading = false
 
-        // if (nextPage >= Number(totalPages)) {
-        //   observer.unobserve(target)
-        // }
+        if (nextPage >= Number(totalPages)) {
+          observer.unobserve(target)
+        }
       })
   }
 </script>
@@ -88,7 +88,7 @@
   <Search bind:query={searchQuery} {handleSubmit} />
   <SearchResults results={searchResults} />
 
-  <div>
+  <div class="loading-indicator">
     {#if isLoading}
       <p>Loading...</p>
     {/if}
