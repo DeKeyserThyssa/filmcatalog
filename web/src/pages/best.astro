@@ -1,22 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import Card from '../components/Card.astro'
-import API_KEY from '../apikey';
+import {API_KEY} from '../apikey';
 import Navigation from '../components/generic/Navigation.astro';
 import Header from '../components/generic/Header.astro';
 
+let nextPage = 1;
+
 const topRated = await fetch(
-  `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`,
+  `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&page=${nextPage}`,
 ).then((res) => res.json())
 
 ---
 
 <Layout title="Best movies">
   <Header />  
-  <main class="w-2/4 m-12 items-center justify-center">  
+  <main class="m-12 items-center justify-center">  
     <h2 class="text-2xl font-bold mb-6">Best movies ever
     </h2>
-    <ul role="list" class="grid grid-cols-5 gap-x-72 gap-6 m-[70px auto]">
+    <ul role="list" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {
         topRated.results.map((movie: any) => {
           return (

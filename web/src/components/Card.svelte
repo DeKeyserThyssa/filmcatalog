@@ -1,13 +1,13 @@
-<script>
-  export let movie;
+<script lang="ts">
+  export let movie: any;
 </script>
 
-<li class="h-auto list-none w-64 rounded-xl shadow-2xl">
+<li class="h-auto list-none rounded-xl shadow-2xl">
   <a href={`movie/${movie.id}`}>
     {#if movie.poster_path === null}
       <img
         class="aspect-[2/3]"
-        src="https://via.placeholder.com/300x450"
+        src="/placeholder_movie.svg"
         alt={movie.title || ''}
       />
     {:else}

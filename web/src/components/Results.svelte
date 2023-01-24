@@ -1,21 +1,21 @@
-<script>
+<script lang="ts">
   import Search from './Search.svelte'
   import { onMount } from 'svelte'
   import SearchResults from './SearchResults.svelte'
-  import API_KEY from '../apikey.ts'
+  import {API_KEY} from '../apikey'
 
   let searchQuery = ''
-  let searchTerm = null
-  let totalPages = null
-  let searchResults = []
-  let nextPage = 1
-  let isLoading = false
+  let searchTerm: string
+  let totalPages: number
+  let searchResults: any[] = []
+  let nextPage: number = 1
+  let isLoading: boolean = false
 
-  let observer
-  let target
+  let observer: any
+  let target: any
 
-  const loadMoreResults = (entries) => {
-    entries.forEach((entry) => {
+  const loadMoreResults = (entries: any) => {
+    entries.forEach((entry: any) => {
       // If new search or if ongoing search
       if (nextPage === 1 || isLoading) return
 
@@ -36,7 +36,7 @@
   function handleSubmit() {
     searchTerm = searchQuery.trim()
     searchResults = []
-    totalPages = null
+    totalPages = 0
     nextPage = 1
 
     if (!searchTerm) return
@@ -84,7 +84,7 @@
   }
 </script>
 
-<main class="App">
+<main>
   <Search bind:query={searchQuery} {handleSubmit} />
   <SearchResults results={searchResults} />
 

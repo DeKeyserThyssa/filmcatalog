@@ -1,20 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import Card from '../components/Card.astro'
-import Results from '../components/Results.svelte'
-import API_KEY from '../apikey';
-import Navigation from '../components/generic/Navigation.astro';
+import {API_KEY} from '../apikey';
 import Header from '../components/generic/Header.astro';
-// import Search from '../components/Search.astro'
-// import SearchResults from '../components/SearchResults.astro'
 
 const searchTerm: string = '';
-
-const todaysMovies = await fetch(
-  `https://api.themoviedb.org/3/trending/movie/day?api_key=${
-    API_KEY
-  }`,
-).then((res) => res.json())
 
 const latestMovie = await fetch(`https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}`).then((res) => res.json())
 
@@ -28,65 +17,14 @@ console.log('Search Movies');
 
 console.log(searchMovies);
 
-
-
-// let searchQuery: string = ''
-// let searchTerm: string | null = null
-// let totalPages: number | null = null
-// let searchResults: any[] = []
-// let nextPage = 1
-// let isLoading = false
-
-// function handleSubmit() {
-//   searchTerm = searchQuery.trim()
-//   searchResults = []
-//   totalPages = null
-//   nextPage = 1
-
-//   if (!searchTerm) return
-
-//   searchMovies()
-// }
-
-// function searchMovies() {
-//   isLoading = true
-
-  // const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=${
-  //   import.meta.env.API_KEY
-  // }&query=${searchTerm}`
-
-//   console.log('endpoint');
-
-//   console.log(endpoint)
-
-//   fetch(endpoint)
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw Error(response.statusText)
-//       }
-//       return response.json()
-//     })
-//     .then((data) => {
-//       if (data.total === 0) {
-//         alert('No movies were found.')
-//         return
-//       }
-//       searchResults = [...searchResults, ...data.results]
-//       totalPages = data.total_pages
-//       if (nextPage < totalPages) {
-//         nextPage += 1
-//       }
-//     })
-
-//     .catch(() => alert('An error occured!'))
-//     .finally(() => {
-//       isLoading = false
-//     })
-// }
-
-// console.log(firstPageMovies)
-// console.log('secondPageMovies')
-// console.log(secondPageMovies)
+function imageIsNull()
+ {
+   if (latestMovie.poster_path === null) {
+     return '/placeholder_movie.svg'
+   } else {
+     return `https://image.tmdb.org/t/p/original${latestMovie.poster_path}`
+   }
+ }
 ---
 
 <Layout title="Home">
@@ -97,13 +35,17 @@ console.log(searchMovies);
     <div class="col-start-2">
       <img
         class="aspect-[2/3]"
-        src={`https://image.tmdb.org/t/p/original${latestMovie.poster_path}`}
-        alt=""
+        src={`${
+          latestMovie.poster_path
+            ? `https://image.tmdb.org/t/p/original${latestMovie.poster_path}`
+            : '/placeholder_movie.svg'
+        }`}
+        alt={`${latestMovie.poster_path}`}
       />
     </div>
     <div class="col-start-4 col-span-3">
       <h1 class="text-4xl">
-        {latestMovie.title} {new Date(latestMovie.release_date).getFullYear()}
+        {latestMovie.title}
       </h1>
       <p class=""><strong>language: </strong>{latestMovie.original_language}</p>
       <h2 class="text-2xl">Overview</h2>
