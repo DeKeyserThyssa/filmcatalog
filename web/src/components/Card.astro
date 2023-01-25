@@ -18,13 +18,13 @@ function imageIsNull()
    }
  }
 
- function getColor(vote_average: number) {
-    if(vote_average>= 8){
-        return '#00ff00'
+ function getColor() {
+    if(vote_average >= 8){
+        return 'text-green-500'
     }else if(vote_average >= 5){
-        return "#ffff00"
+        return "text-yellow-500"
     }else{
-        return '#ff0000'
+        return 'text-red-500'
     }
 }
 ---
@@ -39,7 +39,7 @@ function imageIsNull()
     <div class="p-2">
       <h3 class="text-2xl">{title}</h3>
       <p class=""><strong>language: </strong>{original_language}</p>
-      <p class=""><strong>rating: </strong>{vote_average} ({vote_count})</p>
+      <p class={`${getColor()}`}><strong>rating: </strong>{vote_average} ({vote_count})</p>
     </div>
   </a>
 </li>

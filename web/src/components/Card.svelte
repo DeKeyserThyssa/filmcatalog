@@ -1,5 +1,15 @@
 <script lang="ts">
   export let movie: any;
+
+  function getColor() {
+    if(movie.vote_average >= 8){
+        return 'text-green-500'
+    }else if(movie.vote_average >= 5){
+        return "text-yellow-500"
+    }else if(movie.vote_average < 5){
+        return 'text-red-500'
+    }
+}
 </script>
 
 <li class="h-auto list-none rounded-xl shadow-2xl">
@@ -25,7 +35,7 @@
     <div class="p-2">
       <h3 class="text-2xl">{movie.title}</h3>
       <p class=""><strong>language: </strong>{movie.original_language}</p>
-      <p class="">
+      <p class={`${getColor()}`}>
         <strong>rating: </strong>{movie.vote_average} ({movie.vote_count})
       </p>
     </div>
