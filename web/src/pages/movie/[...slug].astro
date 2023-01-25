@@ -51,7 +51,7 @@ function toHoursAndMinutes(totalMinutes: any) {
             ? `https://image.tmdb.org/t/p/original${data.poster_path}`
             : '/placeholder_movie.svg'
         }`}
-        alt=""
+        alt="image of movie"
       />
     </div>
     <div class="col-start-4 col-span-3">
@@ -111,16 +111,15 @@ function toHoursAndMinutes(totalMinutes: any) {
                   ? `https://image.tmdb.org/t/p/original${el.logo_path}`
                   : 'https://via.placeholder.com/500x750'
               }`}
-              alt=""
+              alt="image of watch provider"
             />
-            <p class="text-lg font-medium">{el.provider_name}</p>
           </li>
         ))}
       </ul>
     </div>
     <div class="mx-10">
       <h2 class="text-2xl">Crew</h2>
-      <ul class="grid grid-cols-6 m-[70px auto]">
+      <ul class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 m-[70px auto]">
         {crew.cast.map((el: any) => (
           <li class="my-4">
             <img
@@ -130,7 +129,7 @@ function toHoursAndMinutes(totalMinutes: any) {
                   ? `https://image.tmdb.org/t/p/original${el.profile_path}`
                   : '/placeholder_cast.svg'
               }`}
-              alt=""
+              alt="image of cast member"
             />
             <p class="text-lg font-medium">{el.name}</p>
             <p class="text-sm font-medium">{el.character}</p>

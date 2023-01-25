@@ -2,13 +2,12 @@
 import Layout from '../layouts/Layout.astro'
 import Card from '../components/Card.astro'
 import {API_KEY} from '../apikey';
-import Navigation from '../components/generic/Navigation.astro';
 import Header from '../components/generic/Header.astro';
 
-let nextPage = 1;
+let page = 1;
 
 const topRated = await fetch(
-  `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&page=${nextPage}`,
+  `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&page=${page}`,
 ).then((res) => res.json())
 
 ---

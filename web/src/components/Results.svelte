@@ -2,13 +2,13 @@
   import Search from './Search.svelte'
   import { onMount } from 'svelte'
   import SearchResults from './SearchResults.svelte'
-  import {API_KEY} from '../apikey'
+  import { API_KEY } from '../apikey'
 
   let searchQuery = ''
   let searchTerm: string
   let totalPages: number
   let searchResults: any[] = []
-  let nextPage: number = 1
+  let page: number = 1
   let isLoading: boolean = false
 
   let observer: any
@@ -17,7 +17,7 @@
   const loadMoreResults = (entries: any) => {
     entries.forEach((entry: any) => {
       // If new search or if ongoing search
-      if (nextPage === 1 || isLoading) return
+      if (page === 1 || isLoading) return
 
       // target is intersecting the viewport
       if (entry.isIntersecting) {
@@ -37,7 +37,7 @@
     searchTerm = searchQuery.trim()
     searchResults = []
     totalPages = 0
-    nextPage = 1
+    page = 1
 
     if (!searchTerm) return
 
@@ -47,7 +47,7 @@
   function searchMovies() {
     isLoading = true
 
-    const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=f273f529bbfef70aa8e1cded08b78e7e&query=${searchTerm}&page=${nextPage}`
+    const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=f273f529bbfef70aa8e1cded08b78e7e&query=${searchTerm}&page=${page}`
 
     fetch(endpoint)
       .then((response) => {
@@ -65,9 +65,9 @@
         searchResults = [...searchResults, ...data.results]
         totalPages = data.total_pages
 
-        if (nextPage <= totalPages) {
-          nextPage += 1
-          if (nextPage >= totalPages) {
+        if (page <= totalPages) {
+          page += 1
+          if (page >= totalPages) {
             return
           }
           searchMovies()
@@ -77,7 +77,7 @@
       .finally(() => {
         isLoading = false
 
-        if (nextPage >= Number(totalPages)) {
+        if (page >= Number(totalPages)) {
           observer.unobserve(target)
         }
       })

@@ -2,11 +2,12 @@
 import Layout from '../layouts/Layout.astro'
 import Card from '../components/Card.astro'
 import {API_KEY} from '../apikey';
-import Navigation from '../components/generic/Navigation.astro';
 import Header from '../components/generic/Header.astro';
 
+let page = 1;
+
 const nowPlaying = await fetch(
-  `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`,
+  `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&page=${page}`,
 ).then((res) => res.json())
 
 ---
