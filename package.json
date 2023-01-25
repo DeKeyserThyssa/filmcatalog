@@ -1,0 +1,29 @@
+{
+  "name": "filmcatalog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:front": "npm run dev -w web"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeKeyserThyssa/filmcatalog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeKeyserThyssa/filmcatalog/issues"
+  },
+  "homepage": "https://github.com/DeKeyserThyssa/filmcatalog#readme",
+  "workspaces": [
+    "web",
+    "api"
+  ],
+  "dependencies": {
+    "@astrojs/vue": "^1.2.2",
+    "vue": "^3.2.45"
+  }
+}

@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Card from '../components/Card.astro'
+import {API_KEY} from '../apikey';
+import Header from '../components/generic/Header.astro';
+
+let page = 1;
+
+const popularMovies = await fetch(
+  `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${page}`,
+).then((res) => res.json())
+
+const weekMovies = await fetch(
+  `https://api.themoviedb.org/3/trending/movie/week?api_key=${
+    API_KEY
+  }&page=${page}`,
+).then((res) => res.json())
+
+const todaysMovies = await fetch(
+  `https://api.themoviedb.org/3/trending/movie/day?api_key=${
+    API_KEY
+  }&page=${page}`,
+).then((res) => res.json())
+
+---
+
+<Layout title="Popular movies">
+  <Header />
+  <main class="m-12 items-center justify-center">
+    <h2 class="text-2xl font-bold mb-6">Popular Movies</h2>
+    <ul role="list" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      {
+        popularMovies.results.map((movie: any) => {
+          return (
+            <Card
+              id={movie.id}
+              title={movie.title}
+              original_language={movie.original_language}
+              poster_path={movie.poster_path}
+              vote_average={movie.vote_average}
+              vote_count={movie.vote_count}
+            />
+          )
+        })
+      }
+    </ul>
+    <h2 class="text-2xl font-bold mb-6">Todays Movies</h2>
+    <ul role="list" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      {
+        todaysMovies.results.map((movie: any) => {
+          return (
+            <Card
+              id={movie.id}
+              title={movie.title}
+              original_language={movie.original_language}
+              poster_path={movie.poster_path}
+              vote_average={movie.vote_average}
+              vote_count={movie.vote_count}
+            />
+          )
+        })
+      }
+    </ul>
+    <h2 class="text-2xl font-bold mb-6">This week movies</h2>
+    <ul role='list' class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      {
+        weekMovies.results.map((movie: any) => {
+          return (
+            <Card
+              id={movie.id}
+              title={movie.title}
+              original_language={movie.original_language}
+              poster_path={movie.poster_path}
+              vote_average={movie.vote_average}
+              vote_count={movie.vote_count}
+            />
+          )
+        })
+      }
+    </ul>
+  </main>
+</Layout>
