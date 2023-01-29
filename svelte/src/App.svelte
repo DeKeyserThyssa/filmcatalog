@@ -44,6 +44,10 @@
     searchMovies()
   }
 
+  function handleInput(event) {
+    searchTerm = event.target.value;
+  }
+
   function searchMovies() {
     isLoading = true
 
@@ -82,6 +86,11 @@
         }
       })
   }
+
+  $: if (searchTerm) {
+    searchMovies();
+  }
+
 </script>
 
 <main class="m-12 items-center justify-center">

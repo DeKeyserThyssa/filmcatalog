@@ -6,7 +6,7 @@
   
   
   <ul class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-    {#each results as result (result.id)}
+    {#each results as result}
       <Card movie={result} />
     {/each}
   </ul>
