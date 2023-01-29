@@ -23,10 +23,8 @@ const data = await fetch(
     API_KEY
   }&language=en-US`,
 ).then((res) => res.json())
-console.log(data)
 
 const crew = await fetch(`https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${API_KEY}`).then((res) => res.json())
-console.log(crew)
 
 const watchProviders = await fetch(`https://api.themoviedb.org/3/movie/${slug}/watch/providers?api_key=${API_KEY}`).then((res) => res.json())
 

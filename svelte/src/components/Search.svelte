@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Svelecte from 'svelecte'
     export let query: string
     export let handleSubmit: () => void
   </script>

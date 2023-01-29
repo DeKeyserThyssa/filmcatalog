@@ -48,6 +48,8 @@
     isLoading = true
 
     const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${page}`
+    console.log(endpoint);
+    
 
     fetch(endpoint)
       .then((response) => {
