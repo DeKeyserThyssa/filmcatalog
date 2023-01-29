@@ -48,7 +48,7 @@
         class="inline-block rounded-md px-3 py-1 outline-none focus-visible:ring-2"
         href="/search"
       >
-        Search
+        <img class="w-6" src="/search.svg" alt="logo" />
       </a>
     </li>
   </ul>
