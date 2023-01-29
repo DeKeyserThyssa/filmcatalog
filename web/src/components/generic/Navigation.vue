@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="grid w-full grid-cols-6 items-center text-center text-xs font-medium sm:w-auto sm:space-x-3 sm:text-left sm:text-sm bg-purple-50 py-3"
+    class="grid w-full grid-cols-5 items-center text-center text-xs font-medium sm:w-auto sm:space-x-3 sm:text-left sm:text-sm bg-purple-50 py-3"
   >
     <li>
       <a
@@ -49,17 +49,6 @@
         href="/search"
       >
         Search
-      </a>
-    </li>
-
-    <li class="sm:pl-8 pl-1">
-      <a
-        class="inline-block rounded-md px-3 py-1 outline-none focus-visible:ring-2"
-        rounded-md
-        ring-2
-        href="/account"
-      >
-        Account
       </a>
     </li>
   </ul>
