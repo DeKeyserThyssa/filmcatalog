@@ -28,7 +28,7 @@ const todaysMovies = await fetch(
 <Layout title="Popular movies">
   <Header />
   <main class="m-12 mb-20 items-center justify-center">
-    <h2 class="text-2xl font-bold mb-6">Popular Movies</h2>
+    <h2 class="text-2xl font-bold text-purple-900 mb-6">Popular Movies</h2>
     <ul role="list" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {
         popularMovies.results.map((movie: any) => {
