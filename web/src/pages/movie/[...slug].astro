@@ -42,8 +42,8 @@ function toHoursAndMinutes(totalMinutes: any) {
 <Layout title={data?.title}>
   <Header />
   <main>
-    <div class="grid grid-cols-7 gap-3 pt-24">
-    <div class="col-start-2">
+    <div class="sm:grid grid-cols-7 gap-3 m-5 pt-4 flex flex-col">
+    <div class="col-start-2 md:col-span-2">
       <img
         class="aspect-[2/3]"
         src={`${
@@ -54,7 +54,7 @@ function toHoursAndMinutes(totalMinutes: any) {
         alt="image of movie"
       />
     </div>
-    <div class="col-start-4 col-span-3">
+    <div class="col-start-4 col-span-2">
       <h1 class="text-4xl">
         {data.title} ({new Date(data.release_date).getFullYear()})
       </h1>
@@ -62,7 +62,7 @@ function toHoursAndMinutes(totalMinutes: any) {
       <p>{data.overview}</p>
       <div>
         <h2 class="text-2xl">Companies</h2>
-        <ul class="flex flex-column">
+        <ul class="flex flex-col sm:flex-row">
           {data.production_companies.map((el: any) => (
             <li class="mr-3">{el.name}</li>
           ))}
@@ -70,7 +70,7 @@ function toHoursAndMinutes(totalMinutes: any) {
       </div>
       <div>
         <h2 class="text-2xl">Genres</h2>
-        <ul class="flex flex-column">
+        <ul class="flex flex-col sm:flex-row">
           {data.genres.map((el: any) => (
             <li class="mr-3">{el.name}</li>
           ))}
@@ -78,7 +78,7 @@ function toHoursAndMinutes(totalMinutes: any) {
       </div>
       <div>
         <h2 class="text-2xl">Countries</h2>
-        <ul class="flex flex-column">
+        <ul class="flex flex-col sm:flex-row">
           {data.production_countries.map((el: any) => (
             <li class="mr-3">{el.name}</li>
           ))}
@@ -86,7 +86,7 @@ function toHoursAndMinutes(totalMinutes: any) {
       </div>
       <div>
         <h2 class="text-2xl">Languages</h2>
-        <ul class="flex flex-column">
+        <ul class="flex flex-col sm:flex-row">
           {data.spoken_languages.map((el: any) => (
             <li class="mr-3">{el.name}</li>
           ))}
@@ -101,7 +101,7 @@ function toHoursAndMinutes(totalMinutes: any) {
   </div>
   <div class="mx-10">
       <h2 class="text-2xl">Watch Providers</h2>
-      <ul class="flex flex-row justify-between">
+      <ul class="flex flex-col sm:flex-row justify-between pr-40">
         {watchProviders.results.US?.buy?.map((el: any) => (
           <li class="my-4">
             <img

@@ -1,4 +1,5 @@
 ---
+import Footer from "../components/generic/Footer.vue";
 import Header from "../components/generic/Header.astro";
 import Results from "../components/Results.svelte";
 import Layout from "../layouts/Layout.astro";
@@ -6,7 +7,8 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Home">
     <Header />
-    <main class="m-12 items-center justify-center">
+    <main class="m-12 mb-20 items-center justify-center">
       <Results client:idle/>
     </main>
+    <Footer />
   </Layout>

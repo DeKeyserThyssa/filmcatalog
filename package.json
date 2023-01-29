@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:front": "npm run dev -w web"
+    "dev:astro": "npm run dev -w web",
+    "dev:svelte": "npm run dev -w svelte"
+
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,8 @@
   "homepage": "https://github.com/DeKeyserThyssa/filmcatalog#readme",
   "workspaces": [
     "web",
-    "api"
+    "api",
+    "svelte"
   ],
   "dependencies": {
     "@astrojs/vue": "^1.2.2",

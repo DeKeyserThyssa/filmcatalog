@@ -47,7 +47,7 @@
   function searchMovies() {
     isLoading = true
 
-    const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=f273f529bbfef70aa8e1cded08b78e7e&query=${searchTerm}&page=${page}`
+    const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${page}`
 
     fetch(endpoint)
       .then((response) => {

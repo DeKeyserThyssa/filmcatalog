@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro'
 import Card from '../components/Card.astro'
 import {API_KEY} from '../apikey';
 import Header from '../components/generic/Header.astro';
+import Footer from '../components/generic/Footer.vue';
 
 let page = 1;
 
@@ -14,7 +15,7 @@ const nowPlaying = await fetch(
 
 <Layout title="Now playing">
   <Header />  
-  <main class="m-12 items-center justify-center">  
+  <main class="m-12 mb-20 items-center justify-center">  
     <h2 class="text-2xl font-bold mb-6">Movies that you can watch now
     </h2>
     <ul role="list" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -34,4 +35,5 @@ const nowPlaying = await fetch(
       }
     </ul>
   </main>
+  <Footer />
 </Layout>
